@@ -3,6 +3,10 @@ import { AddressContainer, AddressHeader, AddressInputs, CartContainer, CartCont
 import * as z from 'zod'
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useContext } from "react";
+import { OrderContext } from "../../contexts/OrderContext";
+import { ProductListItem } from "../../components/ProductListItem";
+import { Separator } from "../../components/ProductListItem/styles";
 
 const checkoutFormValidationSchema = z.object({
     cep: z.number().min(8).max(8),
@@ -18,6 +22,8 @@ const checkoutFormValidationSchema = z.object({
 type checkoutFormData = Zod.infer<typeof checkoutFormValidationSchema>
 
 export function Cart() {
+
+    const { cart } = useContext(OrderContext);
 
     const checkoutForm = useForm<checkoutFormData>({
         resolver: zodResolver(checkoutFormValidationSchema),
@@ -162,7 +168,19 @@ export function Cart() {
                 <CartSummary>
                     <h2>Cafés selecionados</h2>
                     <SummaryContainer> 
-
+                        {cart &&
+                            cart.map((cartItem) => {
+                                return (
+                                    <>
+                                        <ProductListItem
+                                            product={cartItem.product}
+                                            quantity={cartItem.quantity}
+                                        />
+                                        <Separator />
+                                    </>
+                                )
+                            })
+                        }
                     </SummaryContainer>
                 </CartSummary>
 

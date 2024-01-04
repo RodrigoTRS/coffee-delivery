@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { Hero } from "./components/Hero";
+import { Hero } from "../../components/Hero";
 import { HomeContainer, ProductsContent, ProductsGrid } from "./styles";
 import { ProductsContext } from "../../contexts/ProductsContext";
-import { ProductCard } from "./components/ProductCard";
+import { ProductCard } from "../../components/ProductCard";
 
 export function Home() {
     const { products } = useContext(ProductsContext)

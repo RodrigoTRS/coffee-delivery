@@ -1,8 +1,8 @@
 import { Minus, Plus, ShoppingCart } from "phosphor-react";
-import { Product } from "../../../../contexts/ProductsContext";
+import { Product } from "../../contexts/ProductsContext";
 import { CartAndQuantityContainer, CartButton, CounterButton, CounterContainer, ImgContainer, Price, ProductContainer, ProductFooter, ProductTag, TagsContainer, TextContainer } from "./styles";
 import { useContext } from "react";
-import { OrderContext } from "../../../../contexts/OrderContext";
+import { OrderContext } from "../../contexts/OrderContext";
 
 interface ProductCardProps {
     product: Product
@@ -28,7 +28,7 @@ export function ProductCard(data: ProductCardProps) {
         <ProductContainer key={data.product.id}>
 
             <ImgContainer>
-                <img src={data.product.img_path} alt="" />
+                <img src={data.product.img_path}/>
             </ImgContainer>
 
             <TextContainer>
@@ -54,6 +54,7 @@ export function ProductCard(data: ProductCardProps) {
                 </Price>
 
                 <CartAndQuantityContainer>
+                    
                     <CounterContainer>
                         <CounterButton onClick={handleMinusButton}>
                             <Minus size={16} />

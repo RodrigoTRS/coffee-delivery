@@ -89,7 +89,6 @@ export const Price = styled.span`
 
 export const CounterContainer = styled.div`
     display: flex;
-    justify-content: space-between;
     align-items: center;
     background: ${props => props.theme['base-button']};
     border-radius: 6px;

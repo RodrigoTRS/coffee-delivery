@@ -1,7 +1,7 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 import { Product, ProductsContext } from "./ProductsContext";
 
-interface CartItem {
+export interface CartItem {
     product: Product;
     quantity: number;
 }
@@ -11,6 +11,7 @@ interface OrderContextType {
     cartItems: number;
     addNewItemToCart: (id: number) => void;
     removeItemFromCart: (id: number) => void;
+    dropItemFromCart: (id: number) => void;
 }
 
 interface OrderContextProps {
@@ -25,7 +26,6 @@ export function OrderProvider({children}: OrderContextProps) {
 
     const { products } = useContext(ProductsContext);
 
-    
     function addNewItemToCart (id: number) {
 
         const productExistsInCart = cart.find((cartItem) => cartItem.product.id === id)
@@ -75,14 +75,21 @@ export function OrderProvider({children}: OrderContextProps) {
         }
     }
 
+    function dropItemFromCart (id: number) {
+        const productExistsInCart = cart.find((cartItem) => cartItem.product.id === id);
+
+        if (productExistsInCart) {
+                setCart((cart) => cart.filter((item) => item.product.id !== id));
+            }
+    }
+
 
     useEffect(() => {
         setCartItems(cart.length);
-        console.log(cart);
     }, [cart])
 
     return (
-        <OrderContext.Provider value={{ cart, cartItems, addNewItemToCart, removeItemFromCart }}>
+        <OrderContext.Provider value={{ cart, cartItems, addNewItemToCart, removeItemFromCart, dropItemFromCart }}>
             {children}
         </OrderContext.Provider>
     )

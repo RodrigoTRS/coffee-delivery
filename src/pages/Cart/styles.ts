@@ -90,7 +90,7 @@ export const CartSummary = styled.div`
 `
 export const SummaryContainer = styled.div`
     width: 100%;
-    padding: 3.25rem;
+    padding: 2rem;
 
     background: ${props => props.theme['base-card']};
     border-radius: 6px 44px 6px 44px;
