@@ -15,7 +15,7 @@ export function Home() {
                 <ProductsGrid>
                 {products.map((product) => {
                     return (
-                        <ProductCard product={product}/>
+                        <ProductCard key={product.id} product={product}/>
                     )
                 })}
                 </ProductsGrid>

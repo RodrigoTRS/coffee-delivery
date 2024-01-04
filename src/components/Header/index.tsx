@@ -1,8 +1,15 @@
-import { CartButton, CitySpan, HeaderContainer, HeaderContent, HomeButton } from "./styles";
+import { CartButton, CartItems, CitySpan, HeaderContainer, HeaderContent, HomeButton } from "./styles";
 import Logo from '../../assets/coffee-delivery.svg'
 import { MapPin, ShoppingCart } from "phosphor-react";
+import { OrderContext } from "../../contexts/OrderContext";
+import { useContext } from "react";
 
 export function Header() {
+
+    const { cartItems } = useContext(OrderContext)
+
+    
+
     return (
         <HeaderContainer>
             <HeaderContent>
@@ -17,6 +24,12 @@ export function Header() {
                     <CartButton to="/cart">
                         <ShoppingCart size={20} weight="fill"/>
                     </CartButton>
+                    {cartItems != 0 &&
+                            <CartItems>
+                                {cartItems}
+                            </CartItems>
+                    }
+
                 </div>
             </HeaderContent>
         </HeaderContainer>

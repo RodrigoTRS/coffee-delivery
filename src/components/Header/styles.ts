@@ -56,7 +56,25 @@ export const CartButton = styled(Link)`
     color: ${props => props.theme['yellow']};
     transition: opacity 0.1s ;
 
-&:hover {
-    opacity: 0.7;
-}
+    &:hover {
+        opacity: 0.7;
+    }
+`
+
+export const CartItems = styled.div`
+    width: 24px;
+    height: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: ${props => props.theme['yellow']};
+    color: ${props => props.theme.white};
+    border-radius: 50%;
+    position: relative;
+    top: -20px;
+    left: -24px;
+
+    font-size: 0.75rem;
 `

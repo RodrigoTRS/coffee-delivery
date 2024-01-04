@@ -1,7 +1,8 @@
 import { Minus, Plus, ShoppingCart } from "phosphor-react";
 import { Product } from "../../../../contexts/ProductsContext";
 import { CartAndQuantityContainer, CartButton, CounterButton, CounterContainer, ImgContainer, Price, ProductContainer, ProductFooter, ProductTag, TagsContainer, TextContainer } from "./styles";
-import { useState } from "react";
+import { useContext } from "react";
+import { OrderContext } from "../../../../contexts/OrderContext";
 
 interface ProductCardProps {
     product: Product
@@ -9,21 +10,19 @@ interface ProductCardProps {
 
 export function ProductCard(data: ProductCardProps) {
 
-    const [ quantity, setQuantity ] = useState(0)
+    const { cart, addNewItemToCart, removeItemFromCart } = useContext(OrderContext);
 
-    function incrementQuantity() {
-        if (quantity < 99) {
-            setQuantity(quantity + 1);
-        }
-    }
-
-    function decrementQuantity() {
-        if (quantity > 0) {
-            setQuantity(quantity - 1);
-        }
-    }
+    const itemInCart = cart.find((cartItem) => cartItem.product.id === data.product.id)
 
     const formattedPrice = String(data.product.price.toFixed(2)).replace('.', ',');
+
+    function handlePlusButton() {
+        addNewItemToCart(data.product.id);
+    }
+
+    function handleMinusButton() {
+        removeItemFromCart(data.product.id);
+    }
 
     return (
         <ProductContainer key={data.product.id}>
@@ -33,11 +32,11 @@ export function ProductCard(data: ProductCardProps) {
             </ImgContainer>
 
             <TextContainer>
-                
+
                 <TagsContainer>
-                    {data.product.tags.map((tag) => {
+                    { data.product.tags.map((tag, index) => {
                         return (
-                            <ProductTag>
+                            <ProductTag key={index}>
                                 {tag}
                             </ProductTag>
                         )
@@ -56,11 +55,11 @@ export function ProductCard(data: ProductCardProps) {
 
                 <CartAndQuantityContainer>
                     <CounterContainer>
-                        <CounterButton onClick={decrementQuantity}>
+                        <CounterButton onClick={handleMinusButton}>
                             <Minus size={16} />
                         </CounterButton>
-                        {quantity}
-                        <CounterButton onClick={incrementQuantity}>
+                        {itemInCart ? itemInCart.quantity : 0}
+                        <CounterButton onClick={handlePlusButton}>
                             <Plus size={16} />
                         </CounterButton>
                     </CounterContainer>
