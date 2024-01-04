@@ -46,18 +46,26 @@ export const CitySpan = styled.span`
     color: ${props => props.theme['purple']};
 `
 
-export const CartButton = styled(Link)`
+export const CartButton = styled.button`
     padding: 0.75rem;
+    border: 0;
     border-radius: 6px;
     display: flex;
     justify-content: center;
     align-items: center;
     background: ${props => props.theme['yellow-light']};
     color: ${props => props.theme['yellow']};
-    transition: opacity 0.1s ;
 
-    &:hover {
-        opacity: 0.7;
+    cursor: pointer;
+    transition: background-color 0.1s;
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    &:not(:disabled):hover {
+        color: ${props => props.theme['yellow-dark']};
     }
 `
 

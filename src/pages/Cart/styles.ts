@@ -160,3 +160,72 @@ export const PaymentTypeButton = styled(RadioGroup.Item)`
         box-shadow: 0px 0px 0px 2px ${props => props.theme['purple']};
     }
 `
+
+export const OrderSummary = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+`
+
+interface SummatyLineVariant {
+    variant: 'regular' | 'bold';
+}
+
+export const SummaryLine = styled.div<SummatyLineVariant>`
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    span {
+        font-size: ${props => props.variant === 'regular' ? '0.875rem' : '1.5rem'};
+        font-weight: ${props => props.variant === 'bold' && '700'}
+    }
+`
+
+export const FinishCheckout = styled.button`
+    margin-top: 1.5rem;
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    font-weight: 700;
+
+    color: ${props => props.theme.white};
+    background: ${props => props.theme['yellow']};
+    border: 0;
+    border-radius: 6px;
+
+    cursor: pointer;
+    transform: background-color 0.1s;
+
+    &:hover {
+        background: ${props => props.theme['yellow-dark']};
+    }
+`
+
+export const EmptyCart = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 1rem;
+    border-radius: 6px;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+
+    text-transform: uppercase;
+    font-weight: 700;
+
+    background: ${props => props.theme['purple-light']};
+    border: 2px solid ${props => props.theme['purple']};
+    color:${props => props.theme['purple']};
+
+`

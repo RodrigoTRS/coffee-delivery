@@ -6,6 +6,12 @@ import cafeComLeite from './assets/coffees/cafe_com_leite.svg'
 import latte from './assets/coffees/latte.svg'
 import capuccino from './assets/coffees/capuccino.svg'
 import macchiato from './assets/coffees/macchiato.svg'
+import mochaccino from './assets/coffees/mochaccino.svg'
+import chocolateQuente from './assets/coffees/chocolate_quente.svg'
+import cubano from './assets/coffees/cubano.svg'
+import havaiano from './assets/coffees/havaiano.svg'
+import arabe from './assets/coffees/arabe.svg'
+import irlandes from './assets/coffees/irlandes.svg'
 
 export const Products = [
     {
@@ -70,6 +76,54 @@ export const Products = [
         tags: ['Tradicional', 'Com leite'],
         title: 'Macchiato',
         description: 'Café expresso misturado com um pouco de leite quente e espuma',
+        price: 9.9,
+    },
+    {
+        id: 9,
+        img_path: `${mochaccino}`,
+        tags: ['Tradicional', 'Com leite'],
+        title: 'Mocaccino',
+        description: 'Café expresso com calda de chocolate, pouco leite e espuma',
+        price: 9.9,
+    },
+    {
+        id: 10,
+        img_path: `${chocolateQuente}`,
+        tags: ['Especial', 'Com leite'],
+        title: 'Chocolate Quente',
+        description: 'Bebida feita com chocolate dissolvido no leite quente e café',
+        price: 9.9,
+    },
+    {
+        id: 11,
+        img_path: `${cubano}`,
+        tags: ['Especial', 'Alcoólico', 'Gelado'],
+        title: 'Cubano',
+        description: 'Drink gelado de café expresso com rum, creme de leite e hortelã',
+        price: 9.9,
+    },
+    {
+        id: 12,
+        img_path: `${havaiano}`,
+        tags: ['Especial'],
+        title: 'Havaiano',
+        description: 'Bebida adocicada preparada com café e leite de coco',
+        price: 9.9,
+    },
+    {
+        id: 13,
+        img_path: `${arabe}`,
+        tags: ['Especial'],
+        title: 'Árabe',
+        description: 'Bebida preparada com grãos de café árabe e especiarias',
+        price: 9.9,
+    },
+    {
+        id: 14,
+        img_path: `${irlandes}`,
+        tags: ['Especial', 'Alcoólico'],
+        title: 'Irlandês',
+        description: 'Bebida a base de café, uísque irlandês, açúcar e chantilly',
         price: 9.9,
     }
 ]

@@ -3,6 +3,7 @@ import { Product } from "../../contexts/ProductsContext";
 import { CartAndQuantityContainer, CartButton, CounterButton, CounterContainer, ImgContainer, Price, ProductContainer, ProductFooter, ProductTag, TagsContainer, TextContainer } from "./styles";
 import { useContext } from "react";
 import { OrderContext } from "../../contexts/OrderContext";
+import { useNavigate } from "react-router-dom";
 
 interface ProductCardProps {
     product: Product
@@ -10,7 +11,12 @@ interface ProductCardProps {
 
 export function ProductCard(data: ProductCardProps) {
 
+    const navigate = useNavigate();
+
+    
     const { cart, addNewItemToCart, removeItemFromCart } = useContext(OrderContext);
+
+    const cartDisabled = cart.length === 0 ? true : false;
 
     const itemInCart = cart.find((cartItem) => cartItem.product.id === data.product.id)
 
@@ -22,6 +28,10 @@ export function ProductCard(data: ProductCardProps) {
 
     function handleMinusButton() {
         removeItemFromCart(data.product.id);
+    }
+
+    function handleCartButton() {
+        navigate('/cart');
     }
 
     return (
@@ -65,7 +75,7 @@ export function ProductCard(data: ProductCardProps) {
                         </CounterButton>
                     </CounterContainer>
 
-                    <CartButton>
+                    <CartButton onClick={handleCartButton} disabled={cartDisabled}>
                         <ShoppingCart size={20} weight="fill" />
                     </CartButton>
 

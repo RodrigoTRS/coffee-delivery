@@ -3,12 +3,19 @@ import Logo from '../../assets/coffee-delivery.svg'
 import { MapPin, ShoppingCart } from "phosphor-react";
 import { OrderContext } from "../../contexts/OrderContext";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function Header() {
 
-    const { cartItems } = useContext(OrderContext)
+    const navigate = useNavigate();
 
-    
+    const { cart, cartItems } = useContext(OrderContext)
+
+    const cartDisabled = cart.length === 0 ? true : false;
+
+    function handleCartButton() {
+        navigate('/cart');
+    }
 
     return (
         <HeaderContainer>
@@ -21,7 +28,7 @@ export function Header() {
                         <MapPin size={20} weight="fill"/>
                         Porto Alegre, RS
                     </CitySpan>
-                    <CartButton to="/cart">
+                    <CartButton onClick={handleCartButton} disabled={cartDisabled}>
                         <ShoppingCart size={20} weight="fill"/>
                     </CartButton>
                     {cartItems != 0 &&

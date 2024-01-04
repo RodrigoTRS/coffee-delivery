@@ -136,8 +136,15 @@ export const CartButton = styled.button`
     cursor: pointer;
     transition: background-color 0.1s;
 
-    &:hover {
+    &:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+
+    &:not(:disabled):hover {
         background: ${props => props.theme['purple-dark']};
     }
+
+
 `
 

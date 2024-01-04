@@ -1,17 +1,46 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 import { Product, ProductsContext } from "./ProductsContext";
+import { checkoutFormData } from "../pages/Cart";
 
 export interface CartItem {
     product: Product;
     quantity: number;
 }
 
+interface CheckoutFormData {
+    cep: number,
+    rua: string,
+    numero: number,
+    complemento?: string,
+    bairro: string,
+    cidade: string,
+    uf: string,
+    pagamento: "dinheiro" | "cartao_de_credito" | "cartao_de_debito";
+}
+
+interface Address {
+    cep: number,
+    rua: string,
+    numero: number,
+    complemento: string | undefined,
+    bairro: string,
+    cidade: string,
+    uf: string,
+}
+
+interface PaymentData {
+    pagamento: "dinheiro" | "cartao_de_credito" | "cartao_de_debito";
+}
+
 interface OrderContextType {
     cart: CartItem[];
     cartItems: number;
+    address: Address;
+    paymentData: PaymentData;
     addNewItemToCart: (id: number) => void;
     removeItemFromCart: (id: number) => void;
     dropItemFromCart: (id: number) => void;
+    handleCheckoutFormData: (data: CheckoutFormData) => void;
 }
 
 interface OrderContextProps {
@@ -23,6 +52,16 @@ export const OrderContext = createContext({} as OrderContextType)
 export function OrderProvider({children}: OrderContextProps) {
     const [ cart, setCart ] = useState<CartItem[]>([]);
     const [ cartItems, setCartItems ] = useState(0);
+    const [ paymentData, setPaymentData ] = useState<PaymentData>({pagamento: 'dinheiro'})
+    const [ address, setAddress ] = useState<Address>({
+        cep: 0,
+        rua: '',
+        numero: 0,
+        complemento: undefined,
+        bairro: '',
+        cidade: '',
+        uf: '',
+    })
 
     const { products } = useContext(ProductsContext);
 
@@ -83,13 +122,42 @@ export function OrderProvider({children}: OrderContextProps) {
             }
     }
 
+    function handleCheckoutFormData(data: checkoutFormData) {
+
+        const newAdress = {
+            cep: data.cep,
+            rua: data.rua,
+            numero: data.numero,
+            complemento: data.complemento,
+            bairro: data.bairro,
+            cidade: data.cidade,
+            uf: data.uf,
+        }
+
+        setAddress(newAdress);
+
+        const newPaymentData = {
+            pagamento: data.pagamento
+        }
+        
+        setPaymentData(newPaymentData);
+    }
 
     useEffect(() => {
         setCartItems(cart.length);
     }, [cart])
 
     return (
-        <OrderContext.Provider value={{ cart, cartItems, addNewItemToCart, removeItemFromCart, dropItemFromCart }}>
+        <OrderContext.Provider value={{
+            cart,
+            cartItems,
+            address,
+            paymentData,
+            addNewItemToCart,
+            removeItemFromCart,
+            dropItemFromCart,
+            handleCheckoutFormData,
+        }}>
             {children}
         </OrderContext.Provider>
     )
