@@ -16,7 +16,7 @@ interface OrderData {
     cidade: string
     uf: string
     cep: string
-    metodo_de_pagamento: PaymentMethodOptions | null
+    metodo_de_pagamento: PaymentMethodOptions
 }
 
 interface CartContextType {
@@ -46,7 +46,7 @@ export function CartContextProvider({children}: CartContextProps) {
         cidade: "",
         uf: "",
         cep: "",
-        metodo_de_pagamento: null
+        metodo_de_pagamento: "dinheiro"
     })
 
     function updateOrderData(data: CartFormData) {
