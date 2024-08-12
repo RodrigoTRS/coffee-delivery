@@ -5,6 +5,7 @@ import { ProductCard } from "./components/product-card"
 import { useEffect, useState } from "react"
 import { api } from "@/lib/axios"
 import { Loader } from "@/components/loader"
+import { env } from "@/utils/env"
 
 
 export function ProductGrid() {
